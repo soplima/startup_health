@@ -5,51 +5,44 @@ async function request(path, options = {}) {
     headers: { 'Content-Type': 'application/json' },
     ...options,
   })
+
   if (!res.ok) {
     const body = await res.json().catch(() => ({}))
     throw new Error(body.detail || `Request failed: ${res.status}`)
   }
+
   return res.json()
 }
 
 export const api = {
   listCompanies: () => request('/companies'),
+
   createCompany: (data) =>
-    request('/companies', { method: 'POST', body: JSON.stringify(data) }),
+    request('/companies', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
   getCompany: (id) => request(`/companies/${id}`),
+
   listMetrics: (id) => request(`/companies/${id}/metrics`),
+
   addMetric: (id, data) =>
-    request(`/companies/${id}/metrics`, { method: 'POST', body: JSON.stringify(data) }),
-  getLatestKpis: (id) => request(`/companies/${id}/kpis/latest`),
-}
+    request(`/companies/${id}/metrics`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
 
-export async function deleteCompany(companyId) {
-  const response = await fetch(
-    `/companies/${companyId}`,
-    {
-      method: "DELETE",
-    }
-  )
+  getLatestKpis: (id) =>
+    request(`/companies/${id}/kpis/latest`),
 
-  if (!response.ok) {
-    throw new Error("Failed to delete company")
-  }
+  deleteCompany: (id) =>
+    request(`/companies/${id}`, {
+      method: 'DELETE',
+    }),
 
-  return response.json()
-}
-
-
-export async function deleteMetric(companyId, metricId) {
-  const response = await fetch(
-    `/companies/${companyId}/metrics/${metricId}`,
-    {
-      method: "DELETE",
-    }
-  )
-
-  if (!response.ok) {
-    throw new Error("Failed to delete metric")
-  }
-
-  return response.json()
+  deleteMetric: (companyId, metricId) =>
+    request(`/companies/${companyId}/metrics/${metricId}`, {
+      method: 'DELETE',
+    }),
 }
