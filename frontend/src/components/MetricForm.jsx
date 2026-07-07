@@ -25,6 +25,7 @@ const FIELDS = [
   ['cash_balance', 'Saldo total em caixa', 'number', 'R$'],
   ['monthly_burn', 'Queima de caixa líquida (Net Burn)', 'number', 'R$'],
   ['gross_margin', 'Margem bruta', 'number', '%'],
+  ['ebitda_margin','EBITDA Margin','number','%']
 ]
 
 export default function MetricForm({ companyId, onSubmitted }) {
@@ -54,6 +55,7 @@ export default function MetricForm({ companyId, onSubmitted }) {
         cash_balance: Number(form.cash_balance),
         monthly_burn: Number(form.monthly_burn),
         gross_margin: Number(form.gross_margin || 75),
+        ebitda_margin: form.ebitda_margin === '' ? null : Number(form.ebitda_margin),
       }
       await onSubmitted(companyId, payload)
       setForm(empty)
