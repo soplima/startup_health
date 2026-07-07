@@ -29,7 +29,6 @@ def compute_financial_kpis(current, previous, sector):
         }
     )
 
-    # Burn Multiple
     net_new_arr = (current.mrr - previous.mrr) * 12
 
     burn_multiple = current.monthly_burn / net_new_arr if net_new_arr > 0 else 99.0
@@ -39,6 +38,30 @@ def compute_financial_kpis(current, previous, sector):
         b["burn_multiple_good"],
         b["burn_multiple_ok"],
         False,
+    )
+
+    if current.ebitda_margin is not None:
+        rule_of_40 = growth_rate + current.ebitda_margin
+
+    rule40_status = status(
+        rule_of_40,
+        b["rule40_good"],
+        b["rule40_ok"],
+        higher_is_better=True,
+    )
+
+    indicators.append(
+        {
+            "label": "Rule of 40",
+            "value": round(rule_of_40, 1),
+            "unit": "%",
+            "status": rule40_status,
+            "note": {
+                "good": "Acima da referência do setor",
+                "warn": "Próximo da referência do setor",
+                "bad": "Abaixo da referência do setor",
+            }[rule40_status],
+        }
     )
 
     indicators.append(
@@ -54,8 +77,6 @@ def compute_financial_kpis(current, previous, sector):
             }[burn_status],
         }
     )
-
-    # Runway
 
     runway = (
         current.cash_balance / current.monthly_burn if current.monthly_burn else 0.0
