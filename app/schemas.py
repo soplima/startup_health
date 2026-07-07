@@ -35,6 +35,7 @@ class MetricCreate(BaseModel):
     cash_balance: float
     monthly_burn: float
     gross_margin: float = 75.0
+    ebitda_margin: Optional[float] = None
 
 
 class MetricRead(BaseModel):
@@ -52,6 +53,7 @@ class MetricRead(BaseModel):
     cash_balance: float
     monthly_burn: float
     gross_margin: float
+    ebitda_margin: Optional[float] = None
 
 
 class KPIIndicator(BaseModel):
