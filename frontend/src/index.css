@@ -1,0 +1,152 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f5f5f3;
+  color: #1a1a18;
+}
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+.app-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+.muted { color: #6b6a63; font-size: 14px; }
+
+.panel {
+  background: #fff;
+  border: 1px solid #e4e3dd;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 20px;
+}
+.panel h2 { font-size: 16px; font-weight: 600; margin: 0 0 12px; }
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.panel-header h2 { margin: 0; }
+
+.company-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.company-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 14px;
+  border: 1px solid #d8d7cf;
+  border-radius: 8px;
+  background: #fafaf8;
+  cursor: pointer;
+  font-size: 14px;
+}
+.company-chip.active { border-color: #185fa5; background: #e6f1fb; }
+.chip-meta { font-size: 11px; color: #6b6a63; text-transform: capitalize; }
+
+.inline-form { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.inline-form input, .inline-form select { flex: 1; min-width: 120px; }
+
+input, select {
+  padding: 8px 10px;
+  border: 1px solid #d8d7cf;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #1a1a18;
+  background: #1a1a18;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: default; }
+.btn-ghost {
+  background: transparent;
+  color: #1a1a18;
+  border: 1px solid #d8d7cf;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 12px; color: #6b6a63; }
+.submit-btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+input, select, option {
+  color: #1a1a18 !important;
+  background-color: #ffffff !important;
+}
+
+.company-chip {
+  color: #1a1a18 !important;
+}
+
+.company-chip.active {
+  color: #185fa5 !important;
+  background: #e6f1fb !important;
+}
+
+.chip-meta {
+  color: #6b6a63 !important;
+}
+
+/* Container que junta o prefixo (R$) com o input */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Estilo do R$, % e qtd */
+.input-unit {
+  position: absolute;
+  left: 10px;
+  font-size: 13px;
+  color: #6b6a63;
+  font-weight: 500;
+  pointer-events: none; /* Garante que clicar no R$ foca o input */
+}
+
+/* Ajusta o espaçamento interno do input para o texto não atropelar o R$ */
+.input-wrapper input {
+  width: 100%;
+  padding-left: 34px !important; /* Abre espaço na esquerda para o R$ */
+}
+
+/* Caso o campo seja de data ou não tenha unidade, removemos o recuo */
+.input-wrapper input[type="month"] {
+  padding-left: 10px !important;
+}
+
+.kpi-card { border-radius: 10px; padding: 14px 16px; }
+.kpi-label { font-size: 12px; margin: 0 0 4px; color: #4a4a44; }
+.kpi-value { font-size: 22px; font-weight: 600; margin: 0; }
+.kpi-note { font-size: 12px; margin: 4px 0 0; }
+
+.status-good { background: #eaf3de; }
+.status-good .kpi-value, .status-good .kpi-note, .status-good .kpi-label { color: #27500a; }
+.status-warn { background: #faeeda; }
+.status-warn .kpi-value, .status-warn .kpi-note, .status-warn .kpi-label { color: #633806; }
+.status-bad { background: #fcebeb; }
+.status-bad .kpi-value, .status-bad .kpi-note, .status-bad .kpi-label { color: #791f1f; }
+
+.error-text { color: #a32d2d; font-size: 13px; margin-top: 8px; }
