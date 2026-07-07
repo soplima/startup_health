@@ -15,6 +15,8 @@ BENCHMARKS = {
         "ltv_cac_ok": 2,
         "rule40_good": 40,
         "rule40_ok": 30,
+        "burn_rate_good": 50000,
+        "burn_rate_ok": 100000,
     },
     "marketplace": {
         "burn_multiple_good": 2.0,
@@ -29,6 +31,8 @@ BENCHMARKS = {
         "ltv_cac_ok": 2,
         "rule40_good": 40,
         "rule40_ok": 30,
+        "burn_rate_good": 50000,
+        "burn_rate_ok": 100000,
     },
     "hardware": {
         "burn_multiple_good": 3.0,
@@ -43,6 +47,8 @@ BENCHMARKS = {
         "ltv_cac_ok": 1.5,
         "rule40_good": 40,
         "rule40_ok": 30,
+        "burn_rate_good": 50000,
+        "burn_rate_ok": 100000,
     },
     "fintech": {
         "burn_multiple_good": 1.8,
@@ -57,6 +63,8 @@ BENCHMARKS = {
         "ltv_cac_ok": 2,
         "rule40_good": 40,
         "rule40_ok": 30,
+        "burn_rate_good": 50000,
+        "burn_rate_ok": 100000,
     },
     "ecommerce": {
         "burn_multiple_good": 2.2,
@@ -71,6 +79,8 @@ BENCHMARKS = {
         "ltv_cac_ok": 2,
         "rule40_good": 40,
         "rule40_ok": 30,
+        "burn_rate_good": 50000,
+        "burn_rate_ok": 100000,
     },
 }
 
