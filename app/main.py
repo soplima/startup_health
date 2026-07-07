@@ -117,3 +117,24 @@ def delete_company(company_id: int, db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "Company deleted"}
+
+
+@app.delete("/companies/{company_id}/metrics/{metric_id}")
+def delete_metric(
+    company_id: int,
+    metric_id: int,
+    db: Session = Depends(get_db),
+):
+    metric = (
+        db.query(models.Metric)
+        .filter(models.Metric.id == metric_id, models.Metric.company_id == company_id)
+        .first()
+    )
+
+    if not metric:
+        raise HTTPException(status_code=404, detail="Metric not found")
+
+    db.delete(metric)
+    db.commit()
+
+    return {"message": "Metric deleted"}
