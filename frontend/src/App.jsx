@@ -3,6 +3,7 @@ import { api } from './api'
 import CompanyPanel from './components/CompanyPanel'
 import MetricForm from './components/MetricForm'
 import KpiDashboard from './components/KpiDashboard'
+import MetricHistory from './components/MetricHistory'
 
 export default function App() {
   const [companies, setCompanies] = useState([])
@@ -104,6 +105,7 @@ export default function App() {
             metricsCount={metrics.length}
           />
           <MetricForm companyId={selectedId} onSubmitted={handleAddMetric} />
+          <MetricHistory metrics={metrics} onDelete={handleDeleteMetric} />
         </>
       )}
     </div>
