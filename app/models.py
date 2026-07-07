@@ -1,4 +1,12 @@
-from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey, UniqueConstraint
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Float,
+    Date,
+    ForeignKey,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -9,8 +17,12 @@ class Company(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False, index=True)
-    sector = Column(String, nullable=False, index=True)  # saas, marketplace, hardware, fintech, ecommerce
-    stage = Column(String, nullable=False)  # pre_seed, seed, series_a, series_b, series_c_plus
+    sector = Column(
+        String, nullable=False, index=True
+    )  # saas, marketplace, hardware, fintech, ecommerce
+    stage = Column(
+        String, nullable=False
+    )  # pre_seed, seed, series_a, series_b, series_c_plus
     founded_date = Column(Date, nullable=True)
 
     metrics = relationship(
@@ -23,9 +35,7 @@ class Company(Base):
 
 class Metric(Base):
     __tablename__ = "metrics"
-    __table_args__ = (
-        UniqueConstraint("company_id", "month", name="uq_company_month"),
-    )
+    __table_args__ = (UniqueConstraint("company_id", "month", name="uq_company_month"),)
 
     id = Column(Integer, primary_key=True, index=True)
     company_id = Column(Integer, ForeignKey("companies.id"), nullable=False, index=True)
@@ -40,5 +50,6 @@ class Metric(Base):
     cash_balance = Column(Float, nullable=False)
     monthly_burn = Column(Float, nullable=False)
     gross_margin = Column(Float, nullable=False, default=75.0)  # percent, e.g. 75 = 75%
+    ebitda_margin = Column(Float, nullable=True)
 
     company = relationship("Company", back_populates="metrics")
