@@ -33,6 +33,7 @@ def compute_customer_kpis(current, previous, sector):
                 "warn": "Próximo à mediana do setor",
                 "bad": "Abaixo da mediana do setor",
             }[nrr_status],
+            "category": "customers",
         }
     )
 
