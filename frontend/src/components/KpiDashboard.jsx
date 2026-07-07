@@ -1,3 +1,34 @@
+function formatValue(value, unit) {
+  switch (unit) {
+    case "R$":
+      return value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 0,
+      });
+
+    case "R$/mês":
+      return value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 0,
+      });
+
+    case "%":
+      return `${value}%`;
+
+    case "x":
+      return `${value}x`;
+
+    case "meses":
+      return `${value} meses`;
+
+    default:
+      return `${value} ${unit}`;
+  }
+}
+
+
 export default function KpiDashboard({ kpis, loading, error, metricsCount }) {
   if (loading) return <div className="panel"><p className="muted">Loading KPIs...</p></div>
 
@@ -20,15 +51,20 @@ export default function KpiDashboard({ kpis, loading, error, metricsCount }) {
     <div className="panel">
       <div className="panel-header">
         <h2>Indicadores</h2>
-        <span className="muted">ate {kpis.month} &middot; {kpis.sector}</span>
+        <span className="muted">
+          ate {kpis.month} &middot; {kpis.sector}
+        </span>
       </div>
+
       <div className="kpi-grid">
         {kpis.indicators.map((k) => (
           <div key={k.label} className={`kpi-card status-${k.status}`}>
             <p className="kpi-label">{k.label}</p>
+
             <p className="kpi-value">
-              {k.value}{k.unit === 'percent' ? '%' : k.unit === 'x' ? 'x' : ` ${k.unit}`}
+              {formatValue(k.value, k.unit)}
             </p>
+
             <p className="kpi-note">{k.note}</p>
           </div>
         ))}
