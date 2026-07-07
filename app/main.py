@@ -104,3 +104,16 @@ def latest_kpis(company_id: int, db: Session = Depends(get_db)):
         sector=company.sector,
         indicators=indicators,
     )
+
+
+@app.delete("/companies/{company_id}")
+def delete_company(company_id: int, db: Session = Depends(get_db)):
+    company = db.query(models.Company).filter(models.Company.id == company_id).first()
+
+    if not company:
+        raise HTTPException(status_code=404, detail="Company not found")
+
+    db.delete(company)
+    db.commit()
+
+    return {"message": "Company deleted"}
