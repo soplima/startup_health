@@ -72,7 +72,7 @@ The platform automatically computes the following SaaS metrics:
                     FastAPI REST API
                           │
                   Business Logic Layer
-                 (calculations.py)
+                    (KPI Package)
                           │
                     SQLAlchemy ORM
                           │
@@ -87,11 +87,16 @@ The platform automatically computes the following SaaS metrics:
 .
 ├── app/
 │   ├── benchmarks.py
-│   ├── calculations.py
 │   ├── database.py
 │   ├── main.py
 │   ├── models.py
-│   └── schemas.py
+│   ├── schemas.py
+│   └── kpis/
+│       ├── __init__.py
+│       ├── financial.py
+│       ├── customers.py
+│       ├── sales.py
+│       └── utils.py
 │
 ├── frontend/
 │   ├── src/
@@ -195,7 +200,7 @@ Therefore, **at least two consecutive months of data are required** before KPI c
 
 ## Business Logic
 
-The mathematical calculations are isolated inside `calculations.py`, allowing the API layer to remain lightweight and making the formulas easier to test independently.
+The business logic is organized into a dedicated kpis package. Each module is responsible for a specific category of SaaS metrics (financial, customer, and sales KPIs), while a central entry point aggregates all computed indicators. This modular design keeps the API layer lightweight and makes individual KPI calculations easier to maintain and test.
 
 Current KPIs include:
 
@@ -206,7 +211,7 @@ Current KPIs include:
 - Burn Multiple
 - Runway
 
-Benchmark thresholds are currently stored in `benchmarks.py`.
+Benchmark thresholds are stored in `benchmarks.py`, while shared helper functions (such as KPI status evaluation) are centralized in `kpis/utils.py`.
 
 ---
 
