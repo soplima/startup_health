@@ -52,29 +52,32 @@ def compute_financial_kpis(current, previous, sector):
         False,
     )
 
+    rule_of_40 = None
+
     if current.ebitda_margin is not None:
         rule_of_40 = growth_rate + current.ebitda_margin
 
-    rule40_status = status(
-        rule_of_40,
-        b["rule40_good"],
-        b["rule40_ok"],
-        higher_is_better=True,
-    )
+    if rule_of_40 is not None:
+        rule40_status = status(
+            rule_of_40,
+            b["rule40_good"],
+            b["rule40_ok"],
+            higher_is_better=True,
+        )
 
-    indicators.append(
-        {
-            "label": "Rule of 40",
-            "value": round(rule_of_40, 1),
-            "unit": "%",
-            "status": rule40_status,
-            "note": {
-                "good": "Acima da referência do setor",
-                "warn": "Próximo da referência do setor",
-                "bad": "Abaixo da referência do setor",
-            }[rule40_status],
-        }
-    )
+        indicators.append(
+            {
+                "label": "Rule of 40",
+                "value": round(rule_of_40, 1),
+                "unit": "%",
+                "status": rule40_status,
+                "note": {
+                    "good": "Acima da referência do setor",
+                    "warn": "Próximo da referência do setor",
+                    "bad": "Abaixo da referência do setor",
+                }[rule40_status],
+            }
+        )
 
     # Burn Rate
     burn_rate_status = status(
