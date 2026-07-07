@@ -73,6 +73,7 @@ def compute_sales_kpis(current, previous, sector):
                 "warn": "Viável, mas margem estreita",
                 "bad": "Economia unitária fraca",
             }[ltv_status],
+            "category": "sales",
         }
     )
 
