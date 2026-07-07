@@ -1,0 +1,69 @@
+# Placeholder sector benchmarks.
+
+
+BENCHMARKS = {
+    "saas": {
+        "burn_multiple_good": 1.5,
+        "burn_multiple_ok": 2.5,
+        "nrr_good": 108,
+        "nrr_ok": 95,
+        "cac_payback_good": 18,
+        "cac_payback_ok": 24,
+        "runway_good": 18,
+        "runway_ok": 12,
+        "ltv_cac_good": 3,
+        "ltv_cac_ok": 2,
+    },
+    "marketplace": {
+        "burn_multiple_good": 2.0,
+        "burn_multiple_ok": 3.0,
+        "nrr_good": 100,
+        "nrr_ok": 85,
+        "cac_payback_good": 12,
+        "cac_payback_ok": 18,
+        "runway_good": 15,
+        "runway_ok": 9,
+        "ltv_cac_good": 3,
+        "ltv_cac_ok": 2,
+    },
+    "hardware": {
+        "burn_multiple_good": 3.0,
+        "burn_multiple_ok": 4.5,
+        "nrr_good": 95,
+        "nrr_ok": 80,
+        "cac_payback_good": 24,
+        "cac_payback_ok": 30,
+        "runway_good": 18,
+        "runway_ok": 12,
+        "ltv_cac_good": 2.5,
+        "ltv_cac_ok": 1.5,
+    },
+    "fintech": {
+        "burn_multiple_good": 1.8,
+        "burn_multiple_ok": 2.8,
+        "nrr_good": 105,
+        "nrr_ok": 90,
+        "cac_payback_good": 15,
+        "cac_payback_ok": 20,
+        "runway_good": 18,
+        "runway_ok": 12,
+        "ltv_cac_good": 3,
+        "ltv_cac_ok": 2,
+    },
+    "ecommerce": {
+        "burn_multiple_good": 2.2,
+        "burn_multiple_ok": 3.2,
+        "nrr_good": 100,
+        "nrr_ok": 85,
+        "cac_payback_good": 9,
+        "cac_payback_ok": 12,
+        "runway_good": 12,
+        "runway_ok": 6,
+        "ltv_cac_good": 3,
+        "ltv_cac_ok": 2,
+    },
+}
+
+
+def get_benchmarks(sector: str) -> dict:
+    return BENCHMARKS.get(sector, BENCHMARKS["saas"])
