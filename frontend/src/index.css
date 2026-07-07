@@ -89,7 +89,7 @@ body {
   height: 22px;
   border-radius: 6px;
   cursor: pointer;
-  color: #c3c2ba; /* barely visible until interacted with */
+  color: #1e1e1d; /* barely visible until interacted with */
   font-size: 15px;
   line-height: 1;
 }
@@ -202,3 +202,21 @@ button:disabled { opacity: 0.5; cursor: default; }
 .status-neutral .kpi-value, .status-neutral .kpi-note, .status-neutral .kpi-label { color: #33352e; }
 
 .error-text { color: #a32d2d; font-size: 13px; margin-top: 8px; }
+
+/* --- Metric history rows --- */
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eeeeea;
+}
+.metric-row:last-child { border-bottom: none; }
+
+.metric-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
