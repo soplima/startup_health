@@ -33,29 +33,109 @@ body {
 }
 .panel-header h2 { margin: 0; }
 
+/* --- Company chips --- */
 .company-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
 .company-chip {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 8px 14px;
+  align-items: stretch;
+  gap: 2px;
   border: 1px solid #d8d7cf;
   border-radius: 8px;
   background: #fafaf8;
-  cursor: pointer;
   font-size: 14px;
+  overflow: visible;
 }
 .company-chip.active { border-color: #185fa5; background: #e6f1fb; }
+
+/* Reset the generic dark `button` style for buttons living inside a chip */
+.company-select {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 6px 8px 14px;
+  cursor: pointer;
+  color: #1a1a18;
+  min-width: 0;
+}
+.company-chip.active .company-select { color: #185fa5; }
+.company-select strong {
+  font-weight: 600;
+  font-size: 14px;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .chip-meta { font-size: 11px; color: #6b6a63; text-transform: capitalize; }
+.company-chip.active .chip-meta { color: #3d7bab; }
+
+/* --- Overflow menu (the "⋮") --- */
+.company-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 6px;
+}
+.menu-trigger {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #c3c2ba; /* barely visible until interacted with */
+  font-size: 15px;
+  line-height: 1;
+}
+.menu-trigger:hover,
+.menu-trigger:focus-visible,
+.menu-trigger[aria-expanded='true'] {
+  background: #e4e3dd;
+  color: #1a1a18;
+}
+
+.company-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: #fff;
+  border: 1px solid #e4e3dd;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(20, 20, 18, 0.12);
+  padding: 4px;
+  z-index: 20;
+  min-width: 110px;
+}
+
+.menu-delete {
+  all: unset;
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #a32d2d;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.menu-delete:hover { background: #fcebeb; }
 
 .inline-form { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
 .inline-form input, .inline-form select { flex: 1; min-width: 120px; }
 
-input, select {
+input, select, option {
   padding: 8px 10px;
   border: 1px solid #d8d7cf;
   border-radius: 6px;
   font-size: 14px;
+  color: #1a1a18;
+  background-color: #ffffff;
 }
 
 button {
@@ -84,59 +164,29 @@ button:disabled { opacity: 0.5; cursor: default; }
 .field label { font-size: 12px; color: #6b6a63; }
 .submit-btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
 
-.kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-}
-
-input, select, option {
-  color: #1a1a18 !important;
-  background-color: #ffffff !important;
-}
-
-.company-chip {
-  color: #1a1a18 !important;
-}
-
-.company-chip.active {
-  color: #185fa5 !important;
-  background: #e6f1fb !important;
-}
-
-.chip-meta {
-  color: #6b6a63 !important;
-}
-
-/* Container que junta o prefixo (R$) com o input */
+/* Container that pairs a unit prefix (R$, %, qtd) with an input */
 .input-wrapper {
   display: flex;
   align-items: center;
   position: relative;
   width: 100%;
 }
-
-/* Estilo do R$, % e qtd */
 .input-unit {
   position: absolute;
   left: 10px;
   font-size: 13px;
   color: #6b6a63;
   font-weight: 500;
-  pointer-events: none; /* Garante que clicar no R$ foca o input */
+  pointer-events: none;
 }
+.input-wrapper input { width: 100%; padding-left: 34px; }
+.input-wrapper input[type='month'] { padding-left: 10px; }
 
-/* Ajusta o espaçamento interno do input para o texto não atropelar o R$ */
-.input-wrapper input {
-  width: 100%;
-  padding-left: 34px !important; /* Abre espaço na esquerda para o R$ */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
 }
-
-/* Caso o campo seja de data ou não tenha unidade, removemos o recuo */
-.input-wrapper input[type="month"] {
-  padding-left: 10px !important;
-}
-
 .kpi-card { border-radius: 10px; padding: 14px 16px; }
 .kpi-label { font-size: 12px; margin: 0 0 4px; color: #4a4a44; }
 .kpi-value { font-size: 22px; font-weight: 600; margin: 0; }
@@ -148,5 +198,7 @@ input, select, option {
 .status-warn .kpi-value, .status-warn .kpi-note, .status-warn .kpi-label { color: #633806; }
 .status-bad { background: #fcebeb; }
 .status-bad .kpi-value, .status-bad .kpi-note, .status-bad .kpi-label { color: #791f1f; }
+.status-neutral { background: #eef0ef; }
+.status-neutral .kpi-value, .status-neutral .kpi-note, .status-neutral .kpi-label { color: #33352e; }
 
 .error-text { color: #a32d2d; font-size: 13px; margin-top: 8px; }
