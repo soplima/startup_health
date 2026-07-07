@@ -6,6 +6,18 @@ def compute_financial_kpis(current, previous, sector):
     b = get_benchmarks(sector)
     indicators = []
 
+    arr = current.mrr * 12
+
+    indicators.append(
+        {
+            "label": "ARR",
+            "value": round(arr, 2),
+            "unit": "R$",
+            "status": "good",
+            "note": "Receita recorrente anualizada",
+        }
+    )
+
     # Crescimento do MRR
     growth_rate = (
         ((current.mrr - previous.mrr) / previous.mrr) * 100 if previous.mrr else 0.0
@@ -61,6 +73,50 @@ def compute_financial_kpis(current, previous, sector):
                 "warn": "Próximo da referência do setor",
                 "bad": "Abaixo da referência do setor",
             }[rule40_status],
+        }
+    )
+
+    # Burn Rate
+    burn_rate_status = status(
+        current.monthly_burn,
+        b["burn_rate_good"],
+        b["burn_rate_ok"],
+        higher_is_better=False,
+    )
+
+    indicators.append(
+        {
+            "label": "Burn Rate/ Mensal",
+            "value": round(current.monthly_burn, 2),
+            "unit": "R$",
+            "status": burn_rate_status,
+            "note": {
+                "good": "Queima controlada",
+                "warn": "Monitore os gastos",
+                "bad": "Queima elevada",
+            }[burn_rate_status],
+        }
+    )
+
+    # Gross Margin
+    gross_margin_status = status(
+        current.gross_margin,
+        80,
+        70,
+        True,
+    )
+
+    indicators.append(
+        {
+            "label": "Gross Margin",
+            "value": round(current.gross_margin, 1),
+            "unit": "%",
+            "status": gross_margin_status,
+            "note": {
+                "good": "Margem saudável",
+                "warn": "Margem aceitável",
+                "bad": "Margem baixa",
+            }[gross_margin_status],
         }
     )
 
