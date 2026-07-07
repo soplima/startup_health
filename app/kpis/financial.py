@@ -15,6 +15,7 @@ def compute_financial_kpis(current, previous, sector):
             "unit": "R$",
             "status": "good",
             "note": "Receita recorrente anualizada",
+            "category": "financial",
         }
     )
 
@@ -38,6 +39,7 @@ def compute_financial_kpis(current, previous, sector):
                 if growth_rate > 2
                 else "Crescimento estagnado"
             ),
+            "category": "financial",
         }
     )
 
@@ -76,6 +78,7 @@ def compute_financial_kpis(current, previous, sector):
                     "warn": "Próximo da referência do setor",
                     "bad": "Abaixo da referência do setor",
                 }[rule40_status],
+                "category": "financial",
             }
         )
 
@@ -98,6 +101,7 @@ def compute_financial_kpis(current, previous, sector):
                 "warn": "Monitore os gastos",
                 "bad": "Queima elevada",
             }[burn_rate_status],
+            "category": "financial",
         }
     )
 
@@ -120,6 +124,7 @@ def compute_financial_kpis(current, previous, sector):
                 "warn": "Margem aceitável",
                 "bad": "Margem baixa",
             }[gross_margin_status],
+            "category": "financial",
         }
     )
 
@@ -134,6 +139,7 @@ def compute_financial_kpis(current, previous, sector):
                 "warn": "Monitore de perto",
                 "bad": "Queimando muito rápido para o crescimento",
             }[burn_status],
+            "category": "financial",
         }
     )
 
@@ -159,6 +165,7 @@ def compute_financial_kpis(current, previous, sector):
                 "warn": "Planeje uma captação em breve",
                 "bad": "Urgente, aja agora",
             }[runway_status],
+            "category": "financial",
         }
     )
 
