@@ -24,7 +24,7 @@ The project was built as an end-to-end Business Intelligence application, combin
 
 ## KPIs
 
-The platform automatically computes the following SaaS metrics:
+The platform currently computes the following SaaS metrics. The KPI engine is modular and designed to support additional financial, customer, sales, product, and cohort metrics as the project evolves.
 
 | KPI | Description |
 |------|-------------|
