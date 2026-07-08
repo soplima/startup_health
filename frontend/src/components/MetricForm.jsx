@@ -11,6 +11,14 @@ const empty = {
   cash_balance: '',
   monthly_burn: '',
   gross_margin: '75',
+  daily_active_users: '',
+  monthly_active_users: '',
+  activated_users: '',
+  new_signups: '',
+  trial_users: '',
+  paid_conversions: '',
+  avg_time_to_value_days: '',
+
 }
 
 // O quarto elemento da lista é o prefixo/sufixo visual do campo
@@ -25,7 +33,14 @@ const FIELDS = [
   ['cash_balance', 'Saldo total em caixa', 'number', 'R$'],
   ['monthly_burn', 'Queima de caixa líquida (Net Burn)', 'number', 'R$'],
   ['gross_margin', 'Margem bruta', 'number', '%'],
-  ['ebitda_margin','EBITDA Margin','number','%']
+  ['ebitda_margin','EBITDA Margin','number','%'],
+  ['daily_active_users', 'Usuários ativos por dia (DAU)', 'number', ''],
+  ['monthly_active_users', 'Usuários ativos por mês (MAU)', 'number', ''],
+  ['activated_users', 'Usuários ativados', 'number', ''],
+  ['new_signups', 'Novos cadastros', 'number', ''],
+  ['trial_users', 'Usuários em trial', 'number', ''],
+  ['paid_conversions', 'Conversões para pago', 'number', ''],
+  ['avg_time_to_value_days', 'Tempo até primeira ação de valor', 'number', 'dias'],
 ]
 
 export default function MetricForm({ companyId, onSubmitted }) {
@@ -56,6 +71,13 @@ export default function MetricForm({ companyId, onSubmitted }) {
         monthly_burn: Number(form.monthly_burn),
         gross_margin: Number(form.gross_margin || 75),
         ebitda_margin: form.ebitda_margin === '' ? null : Number(form.ebitda_margin),
+        daily_active_users: Number(form.daily_active_users || 0),
+        monthly_active_users: Number(form.monthly_active_users || 0),
+        activated_users: Number(form.activated_users || 0),
+        new_signups: Number(form.new_signups || 0),
+        trial_users: Number(form.trial_users || 0),
+        paid_conversions: Number(form.paid_conversions || 0),
+        avg_time_to_value_days: Number(form.avg_time_to_value_days || 0),
       }
       await onSubmitted(companyId, payload)
       setForm(empty)
