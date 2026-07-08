@@ -43,6 +43,21 @@ class MetricCreate(BaseModel):
     trial_users: int = 0
     paid_conversions: int = 0
     avg_time_to_value_days: float = 0.0
+    leads: int = 0
+    qualified_leads: int = 0
+    opportunities: int = 0
+    deals_won: int = 0
+    deals_lost: int = 0
+    avg_sales_cycle_days: float = 0.0
+
+    google_ads_spend: float = 0.0
+    google_customers: int = 0
+
+    meta_ads_spend: float = 0.0
+    meta_customers: int = 0
+
+    outbound_spend: float = 0.0
+    outbound_customers: int = 0
 
 
 class MetricRead(BaseModel):
@@ -68,6 +83,21 @@ class MetricRead(BaseModel):
     trial_users: int = 0
     paid_conversions: int = 0
     avg_time_to_value_days: float = 0.0
+    leads: int = 0
+    qualified_leads: int = 0
+    opportunities: int = 0
+    deals_won: int = 0
+    deals_lost: int = 0
+    avg_sales_cycle_days: float = 0.0
+
+    google_ads_spend: float = 0.0
+    google_customers: int = 0
+
+    meta_ads_spend: float = 0.0
+    meta_customers: int = 0
+
+    outbound_spend: float = 0.0
+    outbound_customers: int = 0
 
 
 class KPIIndicator(BaseModel):
