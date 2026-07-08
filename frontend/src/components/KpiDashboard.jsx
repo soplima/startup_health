@@ -1,4 +1,5 @@
 import FinancialKpis from "./FinancialKpis"
+import CustomerKpis from "./CustomersKpis"
 
 export default function KpiDashboard({ kpis }) {
 
@@ -15,6 +16,8 @@ export default function KpiDashboard({ kpis }) {
       </div>
 
       <FinancialKpis indicators={kpis.indicators} />
+
+      <CustomerKpis indicators={kpis.indicators} />
 
     </div>
   )
