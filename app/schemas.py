@@ -36,6 +36,13 @@ class MetricCreate(BaseModel):
     monthly_burn: float
     gross_margin: float = 75.0
     ebitda_margin: Optional[float] = None
+    daily_active_users: int = 0
+    monthly_active_users: int = 0
+    activated_users: int = 0
+    new_signups: int = 0
+    trial_users: int = 0
+    paid_conversions: int = 0
+    avg_time_to_value_days: float = 0.0
 
 
 class MetricRead(BaseModel):
@@ -54,6 +61,13 @@ class MetricRead(BaseModel):
     monthly_burn: float
     gross_margin: float
     ebitda_margin: Optional[float] = None
+    daily_active_users: int = 0
+    monthly_active_users: int = 0
+    activated_users: int = 0
+    new_signups: int = 0
+    trial_users: int = 0
+    paid_conversions: int = 0
+    avg_time_to_value_days: float = 0.0
 
 
 class KPIIndicator(BaseModel):

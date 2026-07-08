@@ -52,4 +52,12 @@ class Metric(Base):
     gross_margin = Column(Float, nullable=False, default=75.0)  # percent, e.g. 75 = 75%
     ebitda_margin = Column(Float, nullable=True)
 
+    daily_active_users = Column(Integer, nullable=False, default=0)
+    monthly_active_users = Column(Integer, nullable=False, default=0)
+    activated_users = Column(Integer, nullable=False, default=0)
+    new_signups = Column(Integer, nullable=False, default=0)
+    trial_users = Column(Integer, nullable=False, default=0)
+    paid_conversions = Column(Integer, nullable=False, default=0)
+    avg_time_to_value_days = Column(Float, nullable=False, default=0.0)
+
     company = relationship("Company", back_populates="metrics")
