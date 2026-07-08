@@ -62,6 +62,7 @@ class KPIIndicator(BaseModel):
     unit: str
     status: Literal["good", "warn", "bad"]
     note: str
+    category: str
 
 
 class KPIResponse(BaseModel):
