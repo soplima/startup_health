@@ -42,6 +42,7 @@ def compute_sales_kpis(current, previous, sector):
                 "warn": "Próximo à mediana do setor",
                 "bad": "Mais lento que a mediana do setor",
             }[cac_status],
+            "category": "sales",
         }
     )
 
