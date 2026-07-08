@@ -1,74 +1,21 @@
-function formatValue(value, unit) {
-  switch (unit) {
-    case "R$":
-      return value.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 0,
-      });
+import FinancialKpis from "./FinancialKpis"
 
-    case "R$/mês":
-      return value.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 0,
-      });
-
-    case "%":
-      return `${value}%`;
-
-    case "x":
-      return `${value}x`;
-
-    case "meses":
-      return `${value} meses`;
-
-    default:
-      return `${value} ${unit}`;
-  }
-}
-
-
-export default function KpiDashboard({ kpis, loading, error, metricsCount }) {
-  if (loading) return <div className="panel"><p className="muted">Loading KPIs...</p></div>
-
-  if (error) {
-    return (
-      <div className="panel">
-        <h2>Indicadores</h2>
-        <p className="muted">
-          {metricsCount < 2
-            ? 'Adicione pelo menos dois meses de métricas para ver os KPIs baseados em crescimento.'
-            : error}
-        </p>
-      </div>
-    )
-  }
+export default function KpiDashboard({ kpis }) {
 
   if (!kpis) return null
 
   return (
     <div className="panel">
+
       <div className="panel-header">
         <h2>Indicadores</h2>
         <span className="muted">
-          ate {kpis.month} &middot; {kpis.sector}
+          até {kpis.month} · {kpis.sector}
         </span>
       </div>
 
-      <div className="kpi-grid">
-        {kpis.indicators.map((k) => (
-          <div key={k.label} className={`kpi-card status-${k.status}`}>
-            <p className="kpi-label">{k.label}</p>
+      <FinancialKpis indicators={kpis.indicators} />
 
-            <p className="kpi-value">
-              {formatValue(k.value, k.unit)}
-            </p>
-
-            <p className="kpi-note">{k.note}</p>
-          </div>
-        ))}
-      </div>
     </div>
   )
 }
