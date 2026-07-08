@@ -19,6 +19,21 @@ const empty = {
   trial_users: "",
   paid_conversions: "",
   avg_time_to_value_days: "",
+  leads: "",
+  qualified_leads: "",
+  opportunities: "",
+  deals_won: "",
+  deals_lost: "",
+  avg_sales_cycle_days: "",
+
+  google_ads_spend: "",
+  google_customers: "",
+
+  meta_ads_spend: "",
+  meta_customers: "",
+
+  outbound_spend: "",
+  outbound_customers: "",
 };
 
 const currencyFields = [
@@ -28,6 +43,9 @@ const currencyFields = [
   "sales_spend",
   "cash_balance",
   "monthly_burn",
+  "google_ads_spend",
+  "meta_ads_spend",
+  "outbound_spend",
 ];
 
 function formatCurrency(value) {
@@ -72,6 +90,25 @@ const FIELDS = [
     "number",
     "dias",
   ],
+    // Sales Funnel
+  ["leads", "Leads gerados", "number", ""],
+  ["qualified_leads", "Leads qualificados", "number", ""],
+  ["opportunities", "Oportunidades", "number", ""],
+  ["deals_won", "Negócios ganhos", "number", ""],
+  ["deals_lost", "Negócios perdidos", "number", ""],
+  ["avg_sales_cycle_days", "Ciclo médio de vendas", "number", "dias"],
+
+  // Google Ads
+  ["google_ads_spend", "Investimento Google Ads", "number", "R$"],
+  ["google_customers", "Clientes via Google Ads", "number", ""],
+
+  // Meta Ads
+  ["meta_ads_spend", "Investimento Meta Ads", "number", "R$"],
+  ["meta_customers", "Clientes via Meta Ads", "number", ""],
+
+  // Outbound
+  ["outbound_spend", "Custo Outbound", "number", "R$"],
+  ["outbound_customers", "Clientes via Outbound", "number", ""],
 ];
 
 export default function MetricForm({ companyId, onSubmitted }) {
@@ -128,6 +165,21 @@ export default function MetricForm({ companyId, onSubmitted }) {
         avg_time_to_value_days: Number(
           form.avg_time_to_value_days || 0
         ),
+        leads: Number(form.leads || 0),
+        qualified_leads: Number(form.qualified_leads || 0),
+        opportunities: Number(form.opportunities || 0),
+        deals_won: Number(form.deals_won || 0),
+        deals_lost: Number(form.deals_lost || 0),
+        avg_sales_cycle_days: Number(form.avg_sales_cycle_days || 0),
+
+        google_ads_spend: parseCurrency(form.google_ads_spend),
+        google_customers: Number(form.google_customers || 0),
+
+        meta_ads_spend: parseCurrency(form.meta_ads_spend),
+        meta_customers: Number(form.meta_customers || 0),
+
+        outbound_spend: parseCurrency(form.outbound_spend),
+        outbound_customers: Number(form.outbound_customers || 0),
       };
 
       await onSubmitted(companyId, payload);
