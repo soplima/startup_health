@@ -1,5 +1,6 @@
 import FinancialKpis from "./FinancialKpis"
 import CustomerKpis from "./CustomersKpis"
+import SalesKpis from "./SalesKpis"
 import ProductKpis from "./ProductKPI"
 
 export default function KpiDashboard({ kpis }) {
@@ -19,6 +20,8 @@ export default function KpiDashboard({ kpis }) {
       <FinancialKpis indicators={kpis.indicators} />
 
       <CustomerKpis indicators={kpis.indicators} />
+
+      <SalesKpis indicators={kpis.indicators} />
 
       <ProductKpis indicators={kpis.indicators} />
 
