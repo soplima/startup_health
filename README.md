@@ -1,274 +1,226 @@
-# Startup Health Tracker
+## Indicadores Monitorados
 
-> A full-stack Business Intelligence platform for monitoring the financial health of SaaS startups.
+O sistema acompanha indicadores financeiros, de clientes, produto, vendas, aquisição e retenção. Cada indicador é comparado com benchmarks esperados para o setor da empresa (`saas`, `marketplace`, `hardware`, `fintech` ou `ecommerce`).
 
-Startup Health Tracker is a full-stack web application that enables founders, investors, and analysts to monitor startup performance through industry-standard financial KPIs. Instead of relying on spreadsheets, the platform stores monthly operational metrics and automatically calculates key indicators that help assess growth, capital efficiency, customer profitability, and financial sustainability.
+Os benchmarks são usados para classificar o desempenho do indicador como:
 
-The project was built as an end-to-end Business Intelligence application, combining a REST API, business logic, persistent storage, and an interactive frontend.
-
----
-
-## Features
-
-- 📊 Company management
-- 📅 Monthly financial metric tracking
-- 📈 Automatic KPI calculation
-- 🎯 Industry benchmark comparison
-- 💰 Financial indicators displayed using localized formats (R$, %, and units)
-- ⚡ FastAPI REST API with automatic OpenAPI documentation
-- ⚛️ React frontend built with Vite
-- 🐳 Dockerized development environment with hot reload
-- 🗄️ Persistent database storage
+- **Good**: desempenho acima ou dentro de uma faixa saudável.
+- **Warning**: desempenho aceitável, mas que merece atenção.
+- **Bad**: desempenho abaixo do esperado.
 
 ---
 
-## KPIs
+### Indicadores Financeiros
 
-The platform currently computes the following SaaS metrics. The KPI engine is modular and designed to support additional financial, customer, sales, product, and cohort metrics as the project evolves.
-
-| KPI | Description |
-|------|-------------|
-| MRR Growth | Month-over-month Monthly Recurring Revenue growth |
-| Net Revenue Retention (NRR) | Revenue retained after expansion and churn |
-| CAC Payback | Time required to recover customer acquisition cost |
-| LTV:CAC Ratio | Customer lifetime value relative to acquisition cost |
-| Burn Multiple | Capital efficiency during growth |
-| Runway | Estimated months before available cash is exhausted |
-
----
-
-## Technology Stack
-
-### Backend
-
-- FastAPI
-- SQLAlchemy
-- Pydantic
-- SQLite (default database)
-- Uvicorn
-
-### Frontend
-
-- React
-- Vite
-- Axios
-
-### DevOps
-
-- Docker
-- Docker Compose
-- Hot Reload
-- Persistent Docker Volumes
+| Indicador | Significado |
+|---|---|
+| **MRR Growth** | Crescimento percentual da receita recorrente mensal em relação ao mês anterior. Mede a velocidade de crescimento da receita previsível. |
+| **Net Revenue Retention (NRR)** | Mede quanto da receita dos clientes existentes permaneceu após considerar churn e expansão. NRR acima de 100% indica crescimento da base sem novas vendas. |
+| **CAC Payback** | Quantidade de meses necessários para recuperar o custo de aquisição de um cliente. Quanto menor, melhor. |
+| **LTV:CAC Ratio** | Relação entre o valor gerado por um cliente durante sua vida útil (LTV) e o custo para adquirir esse cliente (CAC). |
+| **Burn Multiple** | Relação entre o dinheiro consumido pela empresa e o crescimento de receita gerado. Mede eficiência de capital. |
+| **Runway** | Estimativa de quantos meses a empresa consegue operar considerando o caixa atual e o burn mensal. |
+| **Burn Rate** | Valor gasto pela empresa por mês para manter a operação. |
+| **Rule of 40** | Soma da taxa de crescimento da receita com a margem EBITDA. Usado para avaliar equilíbrio entre crescimento e rentabilidade. |
 
 ---
 
-## Architecture
+### Indicadores de Clientes
 
-```text
-                     React + Vite
-                          │
-                    Axios HTTP Client
-                          │
-                    FastAPI REST API
-                          │
-                  Business Logic Layer
-                    (KPI Package)
-                          │
-                    SQLAlchemy ORM
-                          │
-                    SQLite Database
-```
+| Indicador | Significado |
+|---|---|
+| **Active Customers** | Número de clientes ativos atualmente. |
+| **Retention Rate** | Percentual de clientes que continuam ativos após determinado período. |
+| **Net Revenue Retention (NRR)** | Mede retenção considerando expansão de receita e perda de clientes existentes. |
+| **DAU/MAU Ratio** | Relação entre usuários ativos diariamente e usuários ativos mensalmente. Mede frequência de uso do produto. |
 
 ---
 
-## Project Structure
+### Indicadores de Produto
 
-```text
-.
-├── app/
-│   ├── benchmarks.py
-│   ├── database.py
-│   ├── main.py
-│   ├── models.py
-│   ├── schemas.py
-│   └── kpis/
-│       ├── __init__.py
-│       ├── financial.py
-│       ├── customers.py
-│       ├── sales.py
-│       └── utils.py
-│
-├── frontend/
-│   ├── src/
-│   │   ├── api.js
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   └── components/
-│   │       ├── CompanyPanel.jsx
-│   │       ├── MetricForm.jsx
-│   │       └── KpiDashboard.jsx
-│
-├── Dockerfile
-├── compose.yaml
-├── requirements.txt
-└── README.md
-```
+| Indicador | Significado |
+|---|---|
+| **Activation Rate** | Percentual de novos usuários que atingem um evento considerado como ativação do produto. |
+| **Trial Conversion Rate** | Percentual de usuários em teste que se tornam clientes pagantes. |
+| **Time To Value (TTV)** | Tempo necessário para o usuário perceber valor inicial no produto. Quanto menor, melhor. |
 
 ---
 
-## Running with Docker (Recommended)
+### Indicadores de Vendas
 
-Build and start the application:
-
-```bash
-docker compose up --build
-```
-
-The following services will become available:
-
-| Service | URL |
-|----------|-----|
-| Frontend | http://localhost:5173 |
-| Backend API | http://localhost:8000 |
-| API Documentation | http://localhost:8000/docs |
-
-### Useful Docker Commands
-
-```bash
-docker compose up --build
-docker compose up -d
-docker compose down
-docker compose down -v
-docker compose logs -f
-```
+| Indicador | Significado |
+|---|---|
+| **Win Rate** | Percentual de oportunidades comerciais convertidas em vendas. |
+| **Sales Cycle Length** | Tempo médio necessário para fechar uma venda. |
+| **Funnel Conversion Rate** | Percentual de conversão entre etapas do funil comercial. |
 
 ---
 
-## Running Locally
+### Indicadores de Aquisição
 
-### Backend
-
-```bash
-python -m venv .venv
-
-source .venv/bin/activate
-
-pip install -r requirements.txt
-
-uvicorn app.main:app --reload
-```
-
-### Frontend
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
+| Indicador | Significado |
+|---|---|
+| **CAC por Canal** | Custo para adquirir clientes através de cada canal de marketing. |
+| **Google Ads CAC** | Custo médio dos clientes adquiridos via Google Ads. |
+| **Meta Ads CAC** | Custo médio dos clientes adquiridos via Meta Ads. |
+| **Outbound CAC** | Custo médio dos clientes adquiridos através de vendas outbound. |
 
 ---
 
-## How It Works
+## Benchmark por Setor
 
-The workflow is straightforward:
+Os benchmarks são adaptados ao modelo de negócio.
 
-```text
-Create Company
-      │
-      ▼
-Insert Month #1
-      │
-      ▼
-Insert Month #2
-      │
-      ▼
-Business KPIs are calculated
-      │
-      ▼
-Dashboard compares results against benchmarks
-```
+Exemplos:
 
-### Important
+| Indicador | SaaS saudável |
+|---|---|
+| Burn Multiple | < 1.5 |
+| NRR | > 108% |
+| CAC Payback | < 18 meses |
+| Runway | > 18 meses |
+| LTV:CAC | > 3 |
+| Rule of 40 | > 40 |
 
-Several KPIs depend on historical comparisons (such as growth rate and revenue retention).
-
-Therefore, **at least two consecutive months of data are required** before KPI cards can be displayed.
+Os valores mudam conforme o setor cadastrado da empresa.
 
 ---
 
-## Business Logic
+# Análise de Coortes
 
-The business logic is organized into a dedicated kpis package. Each module is responsible for a specific category of SaaS metrics (financial, customer, and sales KPIs), while a central entry point aggregates all computed indicators. This modular design keeps the API layer lightweight and makes individual KPI calculations easier to maintain and test.
+O sistema possui uma análise de retenção por coortes.
 
-Current KPIs include:
+Uma **coorte** é um grupo de clientes que iniciou relacionamento com a empresa no mesmo período.
 
-- Monthly Recurring Revenue Growth
-- Net Revenue Retention
-- CAC Payback
-- LTV:CAC
-- Burn Multiple
-- Runway
+Exemplo:
 
-Benchmark thresholds are stored in `benchmarks.py`, while shared helper functions (such as KPI status evaluation) are centralized in `kpis/utils.py`.
+Clientes cadastrados em janeiro de 2024 formam a coorte de janeiro/2024.
 
----
+O heatmap acompanha esse grupo ao longo do tempo:
 
-## Future Improvements
+| Coluna | Significado |
+|---|---|
+| M0 | Primeiro mês após aquisição |
+| M1 | Um mês depois da aquisição |
+| M2 | Dois meses depois |
+| M12 | Doze meses depois |
 
-Planned features include:
+A porcentagem representa quantos clientes daquela coorte continuam ativos.
 
-- Dynamic benchmark calculation using historical database data
-- PostgreSQL production support
-- JWT authentication
-- User accounts and permissions
-- CSV import/export
-- Interactive historical charts
-- Financial forecasting
-- AI-generated business insights
-- Automatic monthly report generation
+Exemplo:
 
----
+| Coorte | M0 | M1 | M2 |
+|-|-|-|-|
+| Jan/2024 | 100% | 90% | 85% |
 
-## Screenshots
+Significa que:
 
-### Dashboard
+- 100% dos clientes adquiridos em janeiro começaram ativos.
+- Após um mês, 90% continuavam ativos.
+- Após dois meses, 85% continuavam ativos.
 
-> Add a screenshot here.
-
-```text
-docs/dashboard.png
-```
-
-### Company Management
-
-> Add a screenshot here.
-
-```text
-docs/company-panel.png
-```
+Coortes mais recentes possuem menos colunas porque ainda não existe histórico suficiente.
 
 ---
 
-## Motivation
+# Estágios da Startup
 
-This project was developed to explore how Business Intelligence concepts can be applied to startup finance using modern software engineering practices.
+O sistema acompanha a evolução da empresa usando estágios comuns do ciclo de startups.
 
-Rather than focusing only on dashboards, the project demonstrates an end-to-end BI workflow:
-
-- Data collection
-- Persistent storage
-- Business rule implementation
-- KPI computation
-- Benchmark comparison
-- API development
-- Interactive visualization
-
-The goal is to simulate a simplified financial analytics platform similar to those used by venture capital firms and SaaS founders.
+A classificação inicial pode ser alterada conforme a empresa atinge os critérios necessários.
 
 ---
 
-## License
+## Pre-seed
 
-This project is available under the MIT License.
+Fase inicial da startup.
+
+Objetivo principal:
+
+- Validar problema e solução.
+- Criar primeira versão do produto.
+- Encontrar os primeiros clientes.
+- Validar se existe demanda real.
+
+Critérios usados pelo sistema para avançar:
+
+- MRR ≥ R$ 20.000
+- Retenção ≥ 80%
+- Pelo menos 100 clientes ativos
+- CAC Payback ≤ 18 meses
+
+---
+
+## Seed
+
+Empresa encontrou sinais de mercado e começa a buscar escala.
+
+Objetivo:
+
+- Melhorar produto.
+- Aumentar aquisição de clientes.
+- Criar processos comerciais repetíveis.
+- Crescer receita.
+
+Critérios:
+
+- MRR ≥ R$ 80.000
+- Retenção ≥ 85%
+- Pelo menos 300 clientes ativos
+- CAC Payback ≤ 15 meses
+
+---
+
+## Series A
+
+Empresa já possui validação de mercado e busca crescimento acelerado.
+
+Objetivo:
+
+- Escalar aquisição.
+- Expandir equipe.
+- Aumentar participação de mercado.
+
+Critérios:
+
+- MRR ≥ R$ 300.000
+- Retenção ≥ 90%
+- Pelo menos 800 clientes ativos
+- CAC Payback ≤ 12 meses
+
+---
+
+## Series B
+
+Empresa está em fase de expansão.
+
+Objetivo:
+
+- Escalar operações.
+- Expandir mercados.
+- Aumentar eficiência operacional.
+
+Critérios:
+
+- MRR ≥ R$ 800.000
+- Retenção ≥ 92%
+- Pelo menos 2.000 clientes ativos
+- CAC Payback ≤ 10 meses
+
+---
+
+## Series C+
+
+Empresas maduras em expansão.
+
+Objetivo:
+
+- Liderança de mercado.
+- Expansão internacional.
+- Consolidação operacional.
+
+Nesta fase o foco passa de validação para crescimento sustentável e eficiência.
+
+---
+
+O Stage Advisor acompanha automaticamente o progresso da empresa e mostra quais requisitos ainda faltam para alcançar o próximo estágio.
