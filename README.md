@@ -26,6 +26,16 @@ Os benchmarks são usados para classificar o desempenho do indicador como:
 
 ---
 
+|Métrica	| Significado |
+|---|---|
+|**MRR**	|Receita recorrente gerada em um único mês. Mostra a situação atual da receita.
+|**ARR**	|Receita recorrente projetada para um ano inteiro baseada no MRR atual. Mostra a escala anualizada do negócio.
+
+---
+
+
+---
+
 ### Indicadores de Clientes
 
 | Indicador | Significado |
