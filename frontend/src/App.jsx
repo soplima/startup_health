@@ -4,6 +4,7 @@ import CompanyPanel from './components/CompanyPanel'
 import MetricForm from './components/MetricForm'
 import KpiDashboard from './components/KpiDashboard'
 import MetricHistory from './components/MetricHistory'
+import AnalysisPage from './pages/AnalysisPage'
 
 export default function App() {
   const [companies, setCompanies] = useState([])
@@ -13,6 +14,7 @@ export default function App() {
   const [kpiError, setKpiError] = useState(null)
   const [kpiLoading, setKpiLoading] = useState(false)
   const [loadError, setLoadError] = useState(null)
+  const [view, setView] = useState('main') 
 
   const loadCompanies = useCallback(async () => {
     try {
@@ -55,7 +57,7 @@ export default function App() {
     await loadCompanyData(companyId)
   }
 
-    async function handleDeleteCompany(companyId) {
+  async function handleDeleteCompany(companyId) {
     if (!window.confirm("Deseja realmente excluir esta empresa?")) return
 
     await api.deleteCompany(companyId)
@@ -79,6 +81,14 @@ export default function App() {
     await loadCompanyData(selectedId)
   }
 
+  if (view === 'analysis' && selectedId) {
+    return (
+      <div className="app">
+        <AnalysisPage companyId={selectedId} onBack={() => setView('main')} />
+      </div>
+    )
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -89,15 +99,17 @@ export default function App() {
       {loadError && <p className="error-text">Could not reach the API: {loadError}</p>}
 
       <CompanyPanel
-      companies={companies}
-      selectedId={selectedId}
-      onSelect={setSelectedId}
-      onCreate={handleCreateCompany}
-      onDelete={handleDeleteCompany}
-    />
+        companies={companies}
+        selectedId={selectedId}
+        onSelect={setSelectedId}
+        onCreate={handleCreateCompany}
+        onDelete={handleDeleteCompany}
+        onAnalysis={() => setView('analysis')}
+      />
 
       {selectedId && (
         <>
+
           <KpiDashboard
             kpis={kpis}
             loading={kpiLoading}
