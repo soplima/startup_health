@@ -15,6 +15,7 @@ Os benchmarks são usados para classificar o desempenho do indicador como:
 | Indicador | Significado |
 |---|---|
 | **MRR Growth** | Crescimento percentual da receita recorrente mensal em relação ao mês anterior. Mede a velocidade de crescimento da receita previsível. |
+| **ARR (Annual Recurring Revenue)** | Receita recorrente anualizada. Representa a projeção anual da receita recorrente atual, calculada como MRR × 12. É uma métrica de escala e crescimento da empresa. |
 | **Net Revenue Retention (NRR)** | Mede quanto da receita dos clientes existentes permaneceu após considerar churn e expansão. NRR acima de 100% indica crescimento da base sem novas vendas. |
 | **CAC Payback** | Quantidade de meses necessários para recuperar o custo de aquisição de um cliente. Quanto menor, melhor. |
 | **LTV:CAC Ratio** | Relação entre o valor gerado por um cliente durante sua vida útil (LTV) e o custo para adquirir esse cliente (CAC). |
